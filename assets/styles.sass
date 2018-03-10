@@ -1,0 +1,42 @@
+@import 'variables'
+
+.ngx-chat
+  display: flex
+  position: fixed
+  width: $ngx-chat--app-width
+  max-height: $ngx-chat--app-max-height
+  bottom: $ngx-chat--bottom-padding
+  right: $ngx-chat--right-padding
+  background-color: $ngx-chat--main-background-color
+  box-sizing: border-box
+  border-radius: $ngx-chat--border-radius
+  box-shadow: $ngx-chat--app-shadow
+  *
+    box-sizing: border-box !important
+    font-family: $ngx-chat--app-font
+.ngx-notification
+  display: flex
+  flex-direction: row
+  width: 100%
+  background-color: $ngx-chat--second-background-color
+  padding: 15px
+  border-radius: $ngx-chat--border-radius
+  cursor: pointer
+  .user-avatar
+    display: block
+    width: 55px
+    height: 55px
+    background-repeat: no-repeat
+    background-size: contain
+    flex-shrink: 0
+  .user-profile
+    display: flex
+    flex-direction: column
+    width: 100%
+    padding-left: 15px
+    color: $ngx-chat--header-font-color
+.user-profile__name
+  font-size: 18px
+.user-profile__status
+  font-size: 14px
+  padding-top: 2px
