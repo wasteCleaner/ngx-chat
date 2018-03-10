@@ -1,2 +1,2 @@
-import { NgxChatModule as NgxChat } from './ngx-chat/ngx-chat.module';
-export default NgxChat;
+export { NgxChatModule } from './src/ngx-chat.module';
+export { ChatComponent } from './src/chat/chat.component';

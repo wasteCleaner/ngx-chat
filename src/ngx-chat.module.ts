@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ChatService } from './services/chat.service';
 import { ChatComponent } from './chat/chat.component';
 import { ChatNotificationComponent } from './chat-notification/chat-notification.component';
 
@@ -11,7 +10,7 @@ import { ChatNotificationComponent } from './chat-notification/chat-notification
     CommonModule,
     BrowserAnimationsModule
   ],
-  providers: [ChatService],
+  providers: [],
   declarations: [ChatComponent, ChatNotificationComponent],
   exports: [ChatComponent]
 })
