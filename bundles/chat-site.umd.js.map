@@ -1,0 +1,30 @@
+{
+  "version": 3,
+  "file": "chat-site.umd.js",
+  "sources": [
+    "ng://chat-site/out/src/app/ngx-chat/ngx-chat.module.ts",
+    "ng://chat-site/out/src/app/ngx-chat/chat-notification/chat-notification.component.ts",
+    "ng://chat-site/out/src/app/ngx-chat/chat/chat.component.ts",
+    "ng://chat-site/out/src/app/ngx-chat/services/chat.service.ts"
+  ],
+  "sourcesContent": [
+    "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\n\nimport { ChatService } from './services/chat.service';\nimport { ChatComponent } from './chat/chat.component';\nimport { ChatNotificationComponent } from './chat-notification/chat-notification.component';\n\n@NgModule({\n  imports: [\n    CommonModule,\n    BrowserAnimationsModule\n  ],\n  providers: [ChatService],\n  declarations: [ChatComponent, ChatNotificationComponent],\n  exports: [ChatComponent]\n})\nexport class NgxChatModule { }\n",
+    "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-chat-notification',\n  template: `<div class=\"ngx-notification\">\n  <div class=\"user-avatar\" [ngStyle]=\"{'background-image': 'url(' + userProfile.photo + ')'}\"></div>\n  <div class=\"user-profile\">\n    <div class=\"user-profile__name\">{{userProfile.name}}</div>\n    <div class=\"user-profile__status\">{{userProfile.status}}</div>\n  </div>\n</div>`\n})\nexport class ChatNotificationComponent implements OnInit {\n  userProfile = {\n    photo: './assets/images/steve.png',\n    name: 'Steve Jobs',\n    status: 'entrepreneur, business magnate, inventor...'\n  }\n\n\n  constructor() {\n\n  }\n\n  ngOnInit() {\n\n  }\n\n\n\n}\n",
+    "import { Component, OnInit, NgZone } from '@angular/core';\nimport { trigger, state, animate, style, transition } from '@angular/animations';\n\n@Component({\n  selector: 'ngx-chat',\n  template: `<div class=\"ngx-chat\" [@moveInLeft]=\"chatState\">\n  <app-chat-notification></app-chat-notification>\n</div>`,\n  animations: [trigger('moveInLeft', [\n    state('inactive', style({\n      opacity: 0,\n      transform: 'translateX(100%)'\n    })),\n    state('active',   style({\n      opacity: 1,\n      transform: 'translateX(0)'\n    })),\n    transition('inactive => active', animate('300ms ease-in')),\n    transition('active => inactive', animate('300ms ease-out'))\n  ])],\n  host: {'[@moveInLeft]': ''}\n})\nexport class ChatComponent implements OnInit {\n  chatState = 'inactive';\n  timeoutSize = 2000;\n  constructor(private zone: NgZone) {\n    if (this.chatState === 'inactive') setTimeout(() => this.showNotification(), this.timeoutSize);\n  }\n\n  ngOnInit() {\n\n  }\n\n  showNotification() {\n    this.chatState = 'active';\n  }\n\n}\n",
+    "import { Injectable } from '@angular/core';\n\n@Injectable()\nexport class ChatService {\n\n  constructor() { }\n\n}\n"
+  ],
+  "names": [
+    "BrowserAnimationsModule",
+    "CommonModule",
+    "NgModule",
+    "Component",
+    "NgZone",
+    "transition",
+    "animate",
+    "state",
+    "style",
+    "trigger",
+    "Injectable"
+  ],
+  "mappings": ";;;;;;AGAA,IAAA,WAAA,kBAAA,YAAA;IAKE,SAAF,WAAA,GAAA;KAAmB;;;;IAHnB,EAAA,IAAA,EAACU,eAAU,EAAX;;;ADFA,IAAA,aAAA,kBAAA,YAAA;IAyBE,SAAF,aAAA,CAAsB,IAAY,EAAlC;QAAE,IAAF,KAAA,GAAA,IAAA,CAEG;QAFmB,IAAtB,CAAA,IAA0B,GAAJ,IAAI,CAAQ;QAFlC,IAAA,CAAA,SAAA,GAAc,UAAU,CAAxB;QACA,IAAA,CAAA,WAAA,GAAgB,IAAI,CAApB;QAEI,IAAI,IAAI,CAAC,SAAS,KAAK,UAAU;YAAE,UAAU,CAAC,YAAlD,EAAwD,OAAA,KAAI,CAAC,gBAAgB,EAAE,CAA/E,EAA+E,EAAE,IAAI,CAAC,WAAW,CAAC,CAAC;KAChG;IAED,aAAF,CAAA,SAAA,CAAA,QAAU,GAAR,YAAF;KAEG,CAAH;IAEE,aAAF,CAAA,SAAA,CAAA,gBAAkB,GAAhB,YAAF;QACI,IAAI,CAAC,SAAS,GAAG,QAAQ,CAAC;KAC3B,CAAH;;;;IAhCA,EAAA,IAAA,EAACP,cAAS,EAAV,IAAA,EAAA,CAAW;gBACT,QAAQ,EAAE,UAAU;gBACpB,QAAQ,EAAE,iHAEL;gBACL,UAAU,EAAE,CAACM,kBAAO,CAAC,YAAY,EAAE;wBACjCF,gBAAK,CAAC,UAAU,EAAEC,gBAAK,CAAC;4BACtB,OAAO,EAAE,CAAC;4BACV,SAAS,EAAE,kBAAkB;yBAC9B,CAAC,CAAC;wBACHD,gBAAK,CAAC,QAAQ,EAAIC,gBAAK,CAAC;4BACtB,OAAO,EAAE,CAAC;4BACV,SAAS,EAAE,eAAe;yBAC3B,CAAC,CAAC;wBACHH,qBAAU,CAAC,oBAAoB,EAAEC,kBAAO,CAAC,eAAe,CAAC,CAAC;wBAC1DD,qBAAU,CAAC,oBAAoB,EAAEC,kBAAO,CAAC,gBAAgB,CAAC,CAAC;qBAC5D,CAAC,CAAC;gBACH,IAAI,EAAE,EAAC,eAAe,EAAE,EAAE,EAAC;aAC5B,EAAD,EAAA;;;IArBA,EAAA,IAAA,EAA4BF,WAAM,GAAlC;;ADAA,IAAA,yBAAA,kBAAA,YAAA;IAoBE,SAAF,yBAAA,GAAA;QAPA,IAAA,CAAA,WAAA,GAAgB;YACZ,KAAK,EAAE,2BAA2B;YAClC,IAAI,EAAE,YAAY;YAClB,MAAM,EAAE,6CAA6C;SACtD,CAAH;KAKG;IAED,yBAAF,CAAA,SAAA,CAAA,QAAU,GAAR,YAAF;KAEG,CAAH;;;;IAxBA,EAAA,IAAA,EAACD,cAAS,EAAV,IAAA,EAAA,CAAW;gBACT,QAAQ,EAAE,uBAAuB;gBACjC,QAAQ,EAAE,sUAML;aACN,EAAD,EAAA;;;ADXA,IAAA,aAAA,kBAAA,YAAA;IAAA,SAAA,aAAA,GAAA;;;;;IAQA,EAAA,IAAA,EAACD,aAAQ,EAAT,IAAA,EAAA,CAAU;gBACR,OAAO,EAAE;oBACPD,mBAAY;oBACZD,oCAAuB;iBACxB;gBACD,SAAS,EAAE,CAAC,WAAW,CAAC;gBACxB,YAAY,EAAE,CAAC,aAAa,EAAE,yBAAyB,CAAC;gBACxD,OAAO,EAAE,CAAC,aAAa,CAAC;aACzB,EAAD,EAAA;;;;;;;;;;;;;;;;;"
+}
