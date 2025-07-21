@@ -36,8 +36,8 @@ testem.log
 /e2e/*.map
 
 #System Files
-.DS_Store
 Thumbs.db
+.DS_Store
 
 # Config
 /app/config/config.json
